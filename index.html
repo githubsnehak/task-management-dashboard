@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>Task Management</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">APIWIZ</span>
+		</a>
+
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Analytics</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li>
+            <li>
+				<a href="#">
+					<i class="bx bxs-calendar"></i>
+                    <span class="text">Calender</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			
+			<i class="fas fa-arrow-left" style="color: blue;"></i>
+			<form id="searchForm">
+                <div class="form-input">
+                    <input type="search" id="searchInput" placeholder="Search...">
+                    <button type="button" id="searchButton" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                          
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+        <!-- MAIN -->
+               <main>
+                <div class="head-title">
+                    <div class="left">
+                           <h1><i class="fas fa-tasks" style="font-size: 20px; padding-left: 20px;"> </i> TASK BOARD </h1>
+                           <i class="bx bx-filter" id="endDateFilter">Date</i>
+                           <div class="date-filter">
+                               <label for="startDate" clas="small-input" style="color: blue;">Start Date:</label>
+                               <input type="date" id="startDate">
+       
+                               <label for="endDate" style="color: blue;">End Date:</label>
+                               <input type="date" id="endDate">
+                               
+                               <button onclick="filterByDate()" class="small-button">Filter</button>
+                           </div>
+                       
+                           </div>
+                     </div>
+                   <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <main id="zeroTable">
+                                <div class="table-data">
+                                    <div class="order"style="overflow: hidden;">
+                                        <div class="head">
+                                            <h3>READY</h3>
+                                            <span id="zeroTableCount"></span>
+                                            <i class="fas fa-plus">Add Task</i>
+                                            <div class="filtering " id="filter0">
+                                                <i class='bx bx-filter'>Priority Filter</i>
+                                                <span class="filtering-element">
+                                                    <a href="#" data-option="Urgent">Urgent</a>
+                                                    <a href="#" data-option="High">High</a>
+                                                    <a href="#" data-option="Medium">Medium</a>
+                                                    <a href="#" data-option="Low">Low</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <table id="table0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Task</th>
+                                                    <th>Date</th>
+                                                    <th>Priority</th>
+                                                    <th>Assignee</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dragRows">
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p>Task14</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-07-22</td>
+                                                    <td><span class="status completed">LOW</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent " >
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"  class="rounded-circle me-n2" width="45">   
+                                                        </li>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </main>
+                        </div>
+                        <div class="col-lg-6 col-md-12  ">
+                            <main id="firstTable">
+                                <div class="table-data">
+                                
+                                    <div class="order" style="overflow:hidden">
+                                        <div class="head">
+                                            <h3>IN PROGRESS</h3>
+                                            <span id="firstTableCount"></span> 
+                                            <i class="fas fa-plus">Add Task</i>
+                                          
+                                            <div class="filtering " id="filter1">
+                                                <i class='bx bx-filter'>Priority Filter</i>
+                                                <span class="filtering-element">
+                                                    <a href="#" data-option="Urgent">Urgent</a>
+                                                    <a href="#" data-option="High">High</a>
+                                                    <a href="#" data-option="Medium">Medium</a>
+                                                    <a href="#" data-option="Low">Low</a>
+                                                </span>
+                                            </div>
+                                           
+                                        </div>
+                                        <table id="table1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Task</th>
+                                                    <th>Date</th>
+                                                    <th>Priority</th>
+                                                    <th>Assignee</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dragRows">
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        
+                                                        <ul>
+                                                            <p>Task1</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                            
+                                                        </ul>
+                                                        
+                                                       
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2022-01-02</td>
+                                                    <td><span class="status completed">LOW</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent " >
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <span style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 50%; background-color: #007bff;">
+                                                                <i class="fas fa-plus" style="color: white; font-size: 20px;"<span>2</span></i>
+                                                              </span>
+                        
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p>Task2</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                            
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-01-15</td>
+                                                    <td><span class="status pending">HIGH</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar"class="rounded-circle me-n2" width="45">
+                                                           
+                                                        </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p>Task3</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                            
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2022-01-25</td>
+                                                    <td><span class="status process">MEDIUM</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"  class="rounded-circle me-n2" width="45">   
+                                                             
+                                                        </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event) " style="overflow: hidden;">
+                                                    <td>
+                                                        <ul>
+                                                            <p>Task4</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                        
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2022-02-01</td>
+                                                    <td><span class="status urgent">URGENT</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <main id="secondTable">
+                                <div class="table-data">
+                                    <div class="order"style="overflow: hidden;">
+                                        <div class="head">
+                                            <h3>TESTING</h3>
+                                            <span id="secondTableCount"></span>
+                                            <i class="fas fa-plus">Add Task</i>
+                                            <div class="filtering" id="filter2">
+                                                <i class='bx bx-filter'>Priority Filter</i>
+                                                <span class="filtering-element">
+                                                    <a href="#" data-option="Urgent">Urgent</a>
+                                                    <a href="#" data-option="High">High</a>
+                                                    <a href="#" data-option="Medium">Medium</a>
+                                                    <a href="#" data-option="Low">Low</a>
+                                                </span>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        <table id="table2">
+                                            <thead>
+                                                <tr>
+                                                    <th>Task</th>
+                                                    <th>Date</th>
+                                                    <th>Priority</th>
+                                                    <th>Assignee</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dragRows">
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                           <p>Task5</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i> </li>
+                                                           
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-11-30</td>
+                                                    <td><span class="status completed">LOW</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"  class="rounded-circle me-n2" width="45">   
+                                                             
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p>Task6</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                        
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-12-07</td>
+                                                    <td><span class="status pending">HIGH</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <span style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 50%; background-color: #007bff;">
+                                                                <i class="fas fa-plus" style="color: white; font-size: 20px;"<span>2</span></i>
+                                                              </span>
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p>Task7</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                        
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-12-16</td>
+                                                    <td><span class="status process">MEDIUM</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"  class="rounded-circle me-n2" width="45">   
+                                                             
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </main>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <main id="thirdTable">
+                                <div class="table-data">
+                                    <div class="order"style="overflow: hidden;">
+                                        <div class="head">
+                                            <h3>DONE</h3>
+                                            <span id="thirdTableCount"></span>
+                                            <i class="fas fa-plus">Add Task</i>
+                                            <div class="filtering" id="filter3">
+                                              <i class='bx bx-filter'>Priority Filter</i>
+                                                <span class="filtering-element">
+                                                    <a href="#" data-option="Urgent">Urgent</a>
+                                                    <a href="#" data-option="High">High</a>
+                                                    <a href="#" data-option="Medium">Medium</a>
+                                                    <a href="#" data-option="Low">Low</a>
+                                                </span>
+                                            </div>
+                                     </div>
+                                        <table id="table3">
+                                            <thead>
+                                                <tr>
+                                                    <th>Task</th>
+                                                    <th>End Date</th>
+                                                    <th>Priority</th>
+                                                    <th>Assignee</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dragRows">
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                           <p class="com">Task8</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i> </li>
+                                                          
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-11-11</td>
+                                                    <td><span class="status completed">LOW</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"  class="rounded-circle me-n2" width="45">   
+                                                             
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p class="com">Task9</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                        
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-10-21</td>
+                                                    <td><span class="status pending">HIGH</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <span style="display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 50%; background-color: #007bff;">
+                                                                <i class="fas fa-plus" style="color: white; font-size: 20px;"<span>2</span></i>
+                                                              </span>
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event)">
+                                                    <td>
+                                                        <ul>
+                                                            <p class="com">Task10</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                        
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-11-12</td>
+                                                    <td><span class="status process">MEDIUM</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"  class="rounded-circle me-n2" width="45">   
+                                                             
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                                <tr draggable="true" ondragstart="drag(event) " style="overflow: hidden;">
+                                                    <td>
+                                                        <ul>
+                                                            <p class="com">Task12</p>
+                                                            <li> <i class='bx bx-list-plus' style="font-size: smaller;">Default Task List</i></li>
+                                                        
+                                                        </ul>
+                                                        </td>
+                                                        <td style="font-size: small;align-items: center;padding-right: 12px; ">2021-08-10</td>
+                                                    <td><span class="status urgent">URGENT</span></td>
+                                                    <td>
+                                                        <li class="list-group-item border-0 d-flex align-items-center p-0 bg-transparent">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"  class="rounded-circle me-n2" width="45">
+                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar" class="rounded-circle me-n2" width="45">
+                                                          </li>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </main>
+                        </div>
+                    <!-- MAIN -->
+              </section>
+    <!-- CONTENT -->
+
+	<script src="script.js"></script>
+</body>
+</html>
