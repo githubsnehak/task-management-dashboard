@@ -5,7 +5,7 @@ Date: 06/12/2023
 # Introduction
 The objective of this project is to create a web application for task management that enables users to organize tasks into different stages, offers drag-and-drop functionality for task movement, and provides visual metrics. This application helps in managing tasks efficiently by offering categorization and status tracking.
 
-# Technologies Used :
+# Technologies Used 
 -HTML5
 -CSS3
 -JavaScript (ES6)
